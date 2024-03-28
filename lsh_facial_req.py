@@ -13,18 +13,13 @@ import cv2
 import imagehash
 from typing import Dict, List, Tuple
 
-# Initialize 'currentname' to trigger only when a new person is identified.
 currentname = "unknown"
-# Determine faces from encodings.pickle file model created from train_model.py
 encodingsP = "encodings.pickle"
 
-# load the known faces and embeddings along with OpenCV's Haar
-# cascade for face detection
 print("[INFO] loading encodings + face detector...")
 data = pickle.loads(open(encodingsP, "rb").read())
 
-# initialize the video stream and allow the camera sensor to warm up
-# Set the ser to the followng
+
 # src = 0 : for the build in single web cam, could be your laptop webcam
 # src = 2 : I had to set it to 2 inorder to use the USB webcam attached to my laptop
 vs = VideoStream(src=0).start()
@@ -36,17 +31,6 @@ fps = FPS().start()
 
 
 def calculate_signature(frame, hash_size=16):
-    """
-    Calculate the dhash signature of a given file
-
-    Args:
-        image_file: the image (path as string) to calculate the signature for
-        hash_size: hash size to use, signatures will be of length hash_size^2
-
-    Returns:
-        Image signature as Numpy n-dimensional array or None if the file is not a PIL recognized image
-        :param frame:
-    """
     img = Image.fromarray(frame)
     dhash = imagehash.dhash(img, hash_size)
     signature = dhash.hash.flatten()
@@ -54,19 +38,7 @@ def calculate_signature(frame, hash_size=16):
     return signature
 
 
-def find_near_duplicates(curr_signature, last_signature, threshold=0.8, hash_size=16, bands=16):
-    """
-    Find near-duplicate images
-
-    Args:
-        input_dir: Directory with images to check
-        threshold: Images with a similarity ratio >= threshold will be considered near-duplicates
-        hash_size: Hash size to use, signatures will be of length hash_size^2
-        bands: The number of bands to use in the locality sensitve hashing process
-
-    Returns:
-        A list of near-duplicates found. Near duplicates are encoded as a triple: (filename_A, filename_B, similarity)
-    """
+def find_near_duplicates(curr_signature, last_signature, threshold=0.0, hash_size=16, bands=16):
     rows: int = int(hash_size ** 2 / bands)
     signatures = dict()
     hash_buckets_list: List[Dict[str, List[str]]] = [dict() for _ in range(bands)]
@@ -130,6 +102,8 @@ while True:
     similarity = 0
     if len(dups) > 0:
         similarity = (dups[0][2])
+
+    print('Similarity: ', similarity)
 
     encodings = None
     names = None
