@@ -1,6 +1,6 @@
 import cv2
 
-name = 'Sifat'
+name = 'Emily'
 
 cam = cv2.VideoCapture(0)
 
