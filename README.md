@@ -14,7 +14,7 @@ Traditional facial recognition using deep learning can be computationally expens
     -   Else, the system runs the full, expensive face detection and recognition pipeline.
 
 <p align="center">
-    <img src="assets/overview.png" width="450">
+    <img src="assets/overview.png" width="500">
 </p>
 
 This approach significantly reduces power consumption on resource-constrained devices like the Raspberry Pi 4.
@@ -22,7 +22,7 @@ This approach significantly reduces power consumption on resource-constrained de
 ## Experimental Results
 
 <p align="center">
-    <img src="assets/results.png" width="500">
+    <img src="assets/results.png" width="650">
 </p>
 
 On average, it can reduce up to 44% during general usage and up to 71% when idle.
