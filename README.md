@@ -13,12 +13,17 @@ Traditional facial recognition using deep learning can be computationally expens
     -   If the the frame is similar to the previous frame (hash similarity > threshold), the system reuses the previously detected faces and names.
     -   Else, the system runs the full, expensive face detection and recognition pipeline.
 
-![How it works](assets/overview.png)
+<p align="center">
+    <img src="assets/overview.png" width="400">
+</p>
 
 This approach significantly reduces power consumption on resource-constrained devices like the Raspberry Pi 4.
 
-### Experimental Results
-![Experimental Results](assets/results.png)
+## Experimental Results
+
+<p align="center">
+    <img src="assets/results.png" width="400">
+</p>
 
 On average, it can reduce up to 44% during general usage and up to 71% when idle.
 
